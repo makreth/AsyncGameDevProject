@@ -9,6 +9,8 @@ public class LevelManager : MonoBehaviour
 
 	private GameObject lastCheckpoint;
 
+	private Dictionary<Ammo.AmmoType, int> ammoCounts;
+
 	void Start()
 	{
 
@@ -44,5 +46,18 @@ public class LevelManager : MonoBehaviour
 	{
 		// TODO: spawn point should be a checkpoint
 		return lastCheckpoint.transform.position;
+	}
+
+	public void ShiftAmmoCount(Ammo.AmmoType ammoType, int shiftAmount)
+	{
+		ammoCounts[ammoType] = GetAmmoCount(ammoType) + shiftAmount;
+	}
+
+	public int GetAmmoCount(Ammo.AmmoType ammoType)
+	{
+		// Defaults to 0
+		int ammoCount;
+		ammoCounts.TryGetValue(ammoType, out ammoCount);
+		return ammoCount;
 	}
 }
