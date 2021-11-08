@@ -10,6 +10,8 @@ public class ProjectileBehavior : MonoBehaviour
     private SpriteRenderer m_SpriteRenderer;
     private IEnumerator hitStopCall;
     private bool hitStopped;
+
+    private float angle = 0f;
     void Start()
     {
         m_SpriteRenderer = GetComponent<SpriteRenderer>();
@@ -19,8 +21,6 @@ public class ProjectileBehavior : MonoBehaviour
         hitStopped = false;
 
     }
-
-    // Update is called once per frame
     void FixedUpdate()
     {
         float added_speed = speed;
@@ -33,7 +33,7 @@ public class ProjectileBehavior : MonoBehaviour
             }
             
         }
-        transform.Translate(-1 * transform.up * added_speed);
+        transform.Translate( transform.up * added_speed, Space.World);
     }
 
     public IEnumerator HitStopProjectile(){
@@ -42,12 +42,16 @@ public class ProjectileBehavior : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         hitStopped = false;
         m_SpriteRenderer.color = Color.red;
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
         hitStopCall = null;
     }
 
     public void setSpeed(float new_speed){
         speed = new_speed;
+    }
+
+    public void setAngle(float new_angle){
+        angle = new_angle;
     }
 
     public void setHitStopCall(IEnumerator call){
