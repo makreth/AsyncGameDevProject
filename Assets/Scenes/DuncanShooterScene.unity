@@ -322,8 +322,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bullet: {fileID: 909963706663888771, guid: a6fc5a0500e0e20408650fd0dee99bf5, type: 3}
   angle: 120
-  fixedTicksPerShot: 30
-  projectileSpeed: 10
+  fixedTicksPerShot: 15
+  projectileSpeed: 0.05
   firePattern: 0
   rotationSpeed: 1.5
   angleSpread: 120
