@@ -21,12 +21,14 @@ public class CrosshairBehavior : MonoBehaviour
             foreach(RaycastHit2D rayHit in rayHitList){
                 if(rayHit.collider != null){
                     ProjectileBehavior script = rayHit.collider.gameObject.GetComponent<ProjectileBehavior>();
-                    if(script.getHitStopCall() != null){
-                        StopCoroutine(script.getHitStopCall());
+                    if(script != null){
+                        if(script.getHitStopCall() != null){
+                            StopCoroutine(script.getHitStopCall());
+                        }
+                        IEnumerator hitStopCall = script.HitStopProjectile();
+                        script.setHitStopCall(hitStopCall);
+                        StartCoroutine(hitStopCall);
                     }
-                    IEnumerator hitStopCall = script.HitStopProjectile();
-                    script.setHitStopCall(hitStopCall);
-                    StartCoroutine(hitStopCall);
                 }
             }
             

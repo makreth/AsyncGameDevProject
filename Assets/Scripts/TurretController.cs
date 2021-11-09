@@ -32,6 +32,8 @@ public class TurretController : MonoBehaviour
     [SerializeField]
     private float angleSpread;
     private float m_delta_rotation;
+    [SerializeField]
+    private RotationDirection startingRotationDirection = RotationDirection.Clockwise;
     private RotationDirection m_rotation_dir = RotationDirection.Clockwise;
     private float m_tick_timer;
     private float m_interval_timer;
@@ -40,6 +42,7 @@ public class TurretController : MonoBehaviour
 
     void Start()
     {   
+        m_rotation_dir = startingRotationDirection;
         m_tick_timer = 0;
         firing = true;
     }

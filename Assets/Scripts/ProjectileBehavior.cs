@@ -5,6 +5,7 @@ using UnityEngine.EventSystems;
 
 public class ProjectileBehavior : MonoBehaviour
 {
+    public LayerMask playerCollisionMask;
     private float speed = 0f;
     // Start is called before the first frame update
     private SpriteRenderer m_SpriteRenderer;
@@ -29,11 +30,16 @@ public class ProjectileBehavior : MonoBehaviour
                 added_speed = 0;
             }
             else{
-                added_speed = added_speed / 2;
+                added_speed = added_speed * 0.25f;
             }
             
         }
         transform.Translate( transform.up * added_speed, Space.World);
+    }
+
+    public void DroneHit(GameObject drone){
+        Debug.Log("Player hit!");
+        Destroy(gameObject);
     }
 
     public IEnumerator HitStopProjectile(){
