@@ -40,7 +40,9 @@ public class PauseMenu : MonoBehaviour
 
     public void ReturnToMainMenu()
     {
-        SceneManager.LoadScene("MainMenu");
+        Debug.Log("Manu menu scene transition not implemented.");
+        //Time.timeScale = 1f;
+        //SceneManager.LoadScene("MainMenu");
     }
 
     public void QuitGame()
