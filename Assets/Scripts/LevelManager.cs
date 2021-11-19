@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
+	public static LevelManager instance; // make it a singleton
+
 	private bool levelComplete = false;
 	public string playerPrefabName = "Player";
 
@@ -11,9 +13,19 @@ public class LevelManager : MonoBehaviour
 
 	private Dictionary<Ammo.AmmoType, int> ammoCounts;
 
-	void Start()
+	void Awake()
 	{
+		// handle duplicate levelmanager
+		if (instance == null)
+		{
+			instance = this;
+		}
+		else
+		{
+			Destroy(this);
+		}
 
+		DontDestroyOnLoad(gameObject);
 	}
 
 	void Update()
