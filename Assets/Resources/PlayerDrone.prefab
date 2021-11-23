@@ -127,9 +127,6 @@ MonoBehaviour:
   collisionMask:
     serializedVersion: 2
     m_Bits: 64
-  projectileMask:
-    serializedVersion: 2
-    m_Bits: 256
   horizontalRayCount: 4
   verticalRayCount: 4
 --- !u!114 &-5588052660667578939
@@ -147,3 +144,14 @@ MonoBehaviour:
   moveSpeed: 0.1
   jumpHeight: 3
   distanceToPeak: 3
+  maxHp: 12
+  healthPickupGain: 3
+  projectileMask:
+    serializedVersion: 2
+    m_Bits: 256
+  killBoxMask:
+    serializedVersion: 2
+    m_Bits: 512
+  pickupMask:
+    serializedVersion: 2
+    m_Bits: 1024

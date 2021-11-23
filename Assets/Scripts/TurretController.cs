@@ -17,6 +17,8 @@ enum RotationDirection{
 public class TurretController : MonoBehaviour
 {
     [SerializeField]
+    public ProjectileType bulletType;
+    [SerializeField]
     public GameObject bullet;
     [SerializeField]
     private int fixedTicksPerShot;
@@ -27,7 +29,7 @@ public class TurretController : MonoBehaviour
     [SerializeField]
     private FirePattern firePattern;
     [SerializeField]
-    [Range(1f,10f)]
+    [Range(0f,10f)]
     private float rotationSpeed;
     [SerializeField]
     private float angleSpread;
@@ -78,9 +80,9 @@ public class TurretController : MonoBehaviour
         if(firing && m_tick_timer > fixedTicksPerShot){
             m_tick_timer = 0;
             if(firePattern == FirePattern.Single){
-
                 ProjectileBehavior clone_bullet = Instantiate(bullet, transform.position + (transform.up * 0.5f), transform.rotation).GetComponent<ProjectileBehavior>();
                 clone_bullet.setSpeed(projectileSpeed);
+                clone_bullet.applyProjectileType(bulletType);
             }
         }
 
@@ -89,5 +91,13 @@ public class TurretController : MonoBehaviour
             m_interval_timer = 0;
             firing = !firing;
         }
+    }
+
+    void OnBecameInvisible(){
+        gameObject.SetActive(false);
+    }
+
+    void OnBecameVisible(){
+        gameObject.SetActive(true);
     }
 }

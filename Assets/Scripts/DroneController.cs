@@ -7,7 +7,6 @@ using UnityEngine;
 public class DroneController : MonoBehaviour
 {
     public LayerMask collisionMask;
-    public LayerMask projectileMask;
     const float SKIN_WIDTH = .015f;
     [SerializeField]
     [Range(2,6)]
@@ -39,17 +38,6 @@ public class DroneController : MonoBehaviour
         transform.Translate(velocity);
     }
 
-    void RaycastForProjectiles(Vector2 origin, Vector2 direction, float distance){
-        RaycastHit2D hit_projectile = Physics2D.Raycast(origin, direction, distance, projectileMask);
-        if(hit_projectile){
-            GameObject projectile = hit_projectile.collider.gameObject;
-            ProjectileBehavior script = projectile.GetComponent<ProjectileBehavior>();
-            if(script != null){
-                script.DroneHit(gameObject);
-            }
-        }
-    }
-
     void HorizontalCollisions(ref Vector3 velocity){
         float dir_x = Mathf.Sign(velocity.x);
         float ray_length = Mathf.Abs(velocity.x) + SKIN_WIDTH;
@@ -67,7 +55,6 @@ public class DroneController : MonoBehaviour
                 collisions.left = dir_x == -1;
                 collisions.right = dir_x == 1;
             }
-            RaycastForProjectiles(ray_origin, Vector2.right * dir_x, ray_length);
         }
     }
 
@@ -88,7 +75,6 @@ public class DroneController : MonoBehaviour
                 collisions.below = dir_y == -1;
                 collisions.above = dir_y == 1;
             }
-            RaycastForProjectiles(ray_origin, Vector2.up  * dir_y, ray_length);
         }
     }
 

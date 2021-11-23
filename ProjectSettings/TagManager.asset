@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Goal
   - LevelManager
+  - Health
+  - Ammo
+  - Key
   layers:
   - Default
   - TransparentFX
@@ -16,8 +19,8 @@ TagManager:
   - Obstacles
   - Player
   - Projectiles
-  - 
-  - 
+  - KillBox
+  - Pickup
   - 
   - 
   - 
