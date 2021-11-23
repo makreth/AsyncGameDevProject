@@ -796,7 +796,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Bullet Delivery
+  m_Text: Bullet Shipping
 --- !u!222 &460278948
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1744,7 +1744,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: A [COMPANY NAME] GAME
+  m_Text: AN IRVAC GAME
 --- !u!222 &1554735025
 CanvasRenderer:
   m_ObjectHideFlags: 0
