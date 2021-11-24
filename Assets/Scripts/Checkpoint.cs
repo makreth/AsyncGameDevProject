@@ -1,29 +1,57 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 public class Checkpoint : MonoBehaviour
 {
-	private LevelManager levelManager;
+
+	public GameObject spawnpoint;
+	public GameObject trigger;
+	public GameObject camerapoint;
+
+	public GameObject backtrackBlocker = null;
+
+	public GameObject lockedDoor = null;
+
+	[SerializeField]
+	private bool slideCamera = false;
+
+	[SerializeField]
+	private int requiredKeys = 0;
 
 	void Start()
 	{
-		levelManager = GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelManager>();
-	}
-
-	void Update()
-	{
-
-	}
-
-	private void OnTriggerEnter2D(Collider2D other)
-	{
-		if (other.transform.CompareTag("Player"))
-		{
-			levelManager.UpdateLastCheckpoint(gameObject);
-
-			// Disable the box collider since the checkpoint's use is now done
-			GetComponent<BoxCollider2D>().enabled = false;
+		spawnpoint.GetComponent<SpriteRenderer>().enabled = false;
+		trigger.GetComponent<SpriteRenderer>().enabled = false;
+		camerapoint.GetComponent<SpriteRenderer>().enabled = false;
+		camerapoint.SetActive(false);
+		if(backtrackBlocker != null){
+			backtrackBlocker.SetActive(false);
 		}
+		if(lockedDoor != null){
+			Assert.IsTrue(requiredKeys > 0);
+		}
+	}
+
+	public void SpawnPlayer(Player player){
+		player.gameObject.transform.position = spawnpoint.transform.position;
+		player.reset();
+	}
+
+	public void SetupLevel(){
+		if(backtrackBlocker != null){
+			backtrackBlocker.SetActive(true);
+		}
+		if(slideCamera){
+			camerapoint.GetComponent<CameraSlider>().startSlide();
+		}
+		else{
+			Camera.main.transform.position = camerapoint.transform.position;
+		}
+	}
+
+	public int GetRequiredKeys(){
+		return requiredKeys;
 	}
 }
