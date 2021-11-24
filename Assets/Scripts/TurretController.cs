@@ -36,6 +36,9 @@ public class TurretController : MonoBehaviour
     private float m_delta_rotation;
     [SerializeField]
     private RotationDirection startingRotationDirection = RotationDirection.Clockwise;
+    [SerializeField]
+    private int initialDelayTicks;
+    private int delayTimer;
     private RotationDirection m_rotation_dir = RotationDirection.Clockwise;
     private float m_tick_timer;
     private float m_interval_timer;
@@ -47,6 +50,7 @@ public class TurretController : MonoBehaviour
         m_rotation_dir = startingRotationDirection;
         m_tick_timer = 0;
         firing = true;
+        delayTimer = initialDelayTicks;
     }
 
     // Update is called once per frame
@@ -56,6 +60,10 @@ public class TurretController : MonoBehaviour
     }
 
     void FixedUpdate(){
+        if(delayTimer > 0){
+            delayTimer -= 1;
+            return;
+        }
         m_delta_rotation += rotationSpeed;
         
         if(m_delta_rotation >= angleSpread && angleSpread > 0){

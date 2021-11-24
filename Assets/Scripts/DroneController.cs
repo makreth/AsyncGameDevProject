@@ -4,29 +4,16 @@ using UnityEngine;
 
 
 [RequireComponent (typeof (BoxCollider2D))]
-public class DroneController : MonoBehaviour
+public class DroneController : RaycastController
 {
     public LayerMask collisionMask;
-    const float SKIN_WIDTH = .015f;
-    [SerializeField]
-    [Range(2,6)]
-    private int horizontalRayCount = 4;
-    [SerializeField]
-    [Range(2,6)]
-    private int verticalRayCount = 4;
-
-    private float horizontalRaySpacing;
-    private float verticalRaySpacing;
-    private BoxCollider2D m_collider;
-    RaycastOrigins raycastOrigins;
     public CollisionInfo collisions;
-    
-    void Start(){
-        m_collider = GetComponent<BoxCollider2D>();
-        CalculateRaySpacing();
-    }
 
-    public void Move(Vector3 velocity){
+    protected override void Start()
+    {
+        base.Start();
+    }
+    public void Move(Vector3 velocity, bool standingOnPlatform = false){
         UpdateRaycastOrigins();
         collisions.Reset();
         if(velocity.x != 0){
@@ -36,6 +23,10 @@ public class DroneController : MonoBehaviour
             VerticalCollisions(ref velocity);
         }
         transform.Translate(velocity);
+
+        if(standingOnPlatform){
+            collisions.below = true;
+        }
     }
 
     void HorizontalCollisions(ref Vector3 velocity){
@@ -49,6 +40,10 @@ public class DroneController : MonoBehaviour
             Debug.DrawRay(ray_origin, Vector2.right * dir_x * ray_length, Color.red);
 
             if(hit_obstacle){
+                if(hit_obstacle.distance == 0){
+                    continue;
+                }
+                
                 velocity.x = (hit_obstacle.distance - SKIN_WIDTH) * dir_x ;
                 ray_length = hit_obstacle.distance;
 
@@ -78,39 +73,7 @@ public class DroneController : MonoBehaviour
         }
     }
 
-    void UpdateRaycastOrigins(){
-        Bounds bounds = m_collider.bounds;
-        bounds.Expand(SKIN_WIDTH * -2);
-
-        raycastOrigins.bottomLeft = new Vector2(bounds.min.x, bounds.min.y);
-        raycastOrigins.bottomRight = new Vector2(bounds.max.x, bounds.min.y);
-        raycastOrigins.topLeft = new Vector2(bounds.min.x, bounds.max.y);
-        raycastOrigins.topRight = new Vector2(bounds.max.x, bounds.max.y);
-    }
-
-    void CalculateRaySpacing(){
-        Bounds bounds = m_collider.bounds;
-        bounds.Expand(SKIN_WIDTH * -2);
-
-        horizontalRayCount = Mathf.Clamp(horizontalRayCount, 2, int.MaxValue);
-        verticalRayCount = Mathf.Clamp(verticalRayCount, 2, int.MaxValue);
-    
-        horizontalRaySpacing = bounds.size.y / (horizontalRayCount - 1);
-        verticalRaySpacing = bounds.size.x / (verticalRayCount - 1);
-    }
-
-    private struct RaycastOrigins{
-        public Vector2 topLeft, topRight;
-        public Vector2 bottomLeft, bottomRight;
-    }
-
-    public struct CollisionInfo{
-        public bool above, below;
-        public bool left, right;
-
-        public void Reset(){
-            above = below = false;
-            left = right = false;
-        }
+    public override void Trigger(){
+        return;
     }
 }

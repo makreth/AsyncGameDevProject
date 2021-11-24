@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 [RequireComponent (typeof (DroneController))]
 public class Player : MonoBehaviour
@@ -18,6 +19,8 @@ public class Player : MonoBehaviour
     private int maxAmmo;
     [SerializeField]
     private int healthPickupGain;
+    [SerializeField]
+    bool invincible = false;
     public LayerMask projectileMask;
     public LayerMask killBoxMask;
     public LayerMask pickupMask;
@@ -31,8 +34,10 @@ public class Player : MonoBehaviour
     private DroneController droneController;
     private Checkpoint prevCheckpoint;
     private bool inputsFrozen;
+    private SpriteRenderer m_SpriteRenderer;
     
     void Start(){
+        m_SpriteRenderer = GetComponent<SpriteRenderer>();
         droneController = GetComponent<DroneController>();
         jumpVelocity = (2 * jumpHeight * moveSpeed) / distanceToPeak;
         gravity = (-2 * jumpHeight * (float) Math.Pow(moveSpeed,2)) / (float) Math.Pow(distanceToPeak, 2);
@@ -60,19 +65,18 @@ public class Player : MonoBehaviour
             velocity.y = jumpVelocity;
         }
 
-        if(move_input.y <= 0 && velocity.y > 0 && !droneController.collisions.below){
+        if(move_input.y <= 0 && velocity.y != 0 && !droneController.collisions.below){
             velocity.y += gravity;
         }
 
         if(move_input.y < 0 && velocity.y < 0 && !droneController.collisions.below){
-            velocity.y += gravity;
+            velocity.y += gravity * 2;
         }
         
         velocity.x = move_input.x * moveSpeed;
         velocity.y += gravity;
         droneController.Move(velocity);
     }
-
     public void SetCheckpoint(Checkpoint checkpoint){
         prevCheckpoint = checkpoint;
     }
@@ -91,10 +95,17 @@ public class Player : MonoBehaviour
         if (Utility.CheckLayer(projectileMask, targetVal)){
             GameObject projectile = col.gameObject;
             Destroy(projectile);
-            hp -= 1;
+            if(!invincible){
+                hp -= 1;
+                StartCoroutine(Flicker());
+            }
+            
         }
         if(Utility.CheckLayer(killBoxMask, targetVal)){
-            hp -= 3;
+            if(!invincible){
+                hp -= 3;
+            }
+            
             prevCheckpoint.SpawnPlayer(this);
         }
         if(Utility.CheckLayer(pickupMask, targetVal)){
@@ -141,5 +152,11 @@ public class Player : MonoBehaviour
 
     public void SetKeys(int keys){
         this.keys = keys;        
+    }
+
+    private IEnumerator Flicker(){
+        m_SpriteRenderer.color = Color.red;
+        yield return new WaitForSeconds(0.1f);
+        m_SpriteRenderer.color = Color.grey;
     }
 }

@@ -9,6 +9,8 @@ TagManager:
   - Health
   - Ammo
   - Key
+  - Bullet
+  - ShotButton
   layers:
   - Default
   - TransparentFX

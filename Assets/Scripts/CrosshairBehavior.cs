@@ -33,6 +33,10 @@ public class CrosshairBehavior : MonoBehaviour
             RaycastHit2D[] rayHitList = Physics2D.GetRayIntersectionAll(Camera.main.ScreenPointToRay(Input.mousePosition));
             foreach(RaycastHit2D rayHit in rayHitList){
                 if(rayHit.collider != null){
+                    if(rayHit.collider.gameObject.transform.CompareTag("ShotButton")){
+                        rayHit.collider.gameObject.GetComponent<Button>().ActivateButton();
+                        continue;
+                    }
                     if(killshot){
                         Destroy(rayHit.collider.gameObject);
                         continue;
@@ -55,7 +59,6 @@ public class CrosshairBehavior : MonoBehaviour
                 killshot = false;
             }      
         }
-
 
         if(Input.GetMouseButtonDown(1)){
             secondaryFire = !secondaryFire;
