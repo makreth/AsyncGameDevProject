@@ -24,7 +24,6 @@ public class Player : MonoBehaviour
     public LayerMask projectileMask;
     public LayerMask killBoxMask;
     public LayerMask pickupMask;
-
     private int hp;
     private int ammo;
     private int keys;
@@ -44,14 +43,7 @@ public class Player : MonoBehaviour
         hp = maxHp;
     }
 
-    void FixedUpdate(){ 
-        if(prevCheckpoint && prevCheckpoint.lockedDoor != null){
-            if(keys == prevCheckpoint.GetRequiredKeys()){
-                keys = 0;
-                prevCheckpoint.lockedDoor.SetActive(false);
-            }
-        }
-
+    void FixedUpdate(){
         if(droneController.collisions.above || droneController.collisions.below){
             velocity.y = 0;
         }
@@ -71,6 +63,13 @@ public class Player : MonoBehaviour
 
         if(move_input.y < 0 && velocity.y < 0 && !droneController.collisions.below){
             velocity.y += gravity * 2;
+        }
+
+        if(move_input.x < 0 && droneController.collisions.below){
+            m_SpriteRenderer.flipX = true;
+        }
+        if(move_input.x  > 0 && droneController.collisions.below){
+            m_SpriteRenderer.flipX = false;
         }
         
         velocity.x = move_input.x * moveSpeed;
@@ -112,7 +111,6 @@ public class Player : MonoBehaviour
             String obj_tag = col.gameObject.tag;
             if(obj_tag.Equals("Health")){
                 hp += healthPickupGain;
-                Debug.Log("Gained " + healthPickupGain + " health.");
                 if(hp > maxHp){
                     hp = maxHp;
                 }
@@ -122,6 +120,12 @@ public class Player : MonoBehaviour
             }
             if(obj_tag.Equals("Key")){
                 keys += 1;
+                if(prevCheckpoint && prevCheckpoint.lockedDoor != null){
+                    if(keys == prevCheckpoint.GetRequiredKeys()){
+                        keys = 0;
+                        prevCheckpoint.lockedDoor.Trigger();
+                    }
+                }
             }
             Destroy(col.gameObject);
         }

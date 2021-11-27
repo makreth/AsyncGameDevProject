@@ -7,13 +7,14 @@ using UnityEngine;
 public class DroneController : RaycastController
 {
     public LayerMask collisionMask;
-    public CollisionInfo collisions;
+    
 
     protected override void Start()
     {
         base.Start();
     }
-    public void Move(Vector3 velocity, bool standingOnPlatform = false){
+
+    public override void Move(Vector3 velocity, bool standingOnPlatform = false){
         UpdateRaycastOrigins();
         collisions.Reset();
         if(velocity.x != 0){
@@ -22,11 +23,7 @@ public class DroneController : RaycastController
         if(velocity.y != 0){
             VerticalCollisions(ref velocity);
         }
-        transform.Translate(velocity);
-
-        if(standingOnPlatform){
-            collisions.below = true;
-        }
+        base.Move(velocity, standingOnPlatform);
     }
 
     void HorizontalCollisions(ref Vector3 velocity){

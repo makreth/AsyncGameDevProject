@@ -17,8 +17,6 @@ public class PlatformController : RaycastController
     [Range(0,2)]
     private float easeAmount;
     [SerializeField]
-    private bool triggered = false;
-    [SerializeField]
     private bool untriggerWhenDone = false;
     public Vector3[] globalWaypoints;
     int fromWaypointIndex;
@@ -26,6 +24,7 @@ public class PlatformController : RaycastController
     float nextMoveTime;
     List<PassengerMovement> passengerMovements;
     Dictionary<Transform, DroneController> passengerDictionary = new Dictionary<Transform, DroneController>();
+
     protected override void Start(){
         base.Start();
 
@@ -58,7 +57,7 @@ public class PlatformController : RaycastController
     }
 
     Vector3 CalculatePlatformMovement(bool nullFlag = false){
-        if(!nullFlag && (Time.time < nextMoveTime || (triggered && !activeFlag))){
+        if(!nullFlag && (Time.time < nextMoveTime || (!activeFlag))){
             return Vector3.zero;
         }
         fromWaypointIndex %= globalWaypoints.Length;
@@ -73,10 +72,13 @@ public class PlatformController : RaycastController
             percentBetweenWaypoints = 0;
             fromWaypointIndex += 1;
             
-            if(fromWaypointIndex >= globalWaypoints.Length - 1){
-                if(triggered && untriggerWhenDone){
+            if(cyclic && fromWaypointIndex == globalWaypoints.Length){
+                if(untriggerWhenDone){
                     activeFlag = false;
-                    GetTriggeringObject().GetComponent<Button>().SetOffPosition();
+                    GameObject trigger = GetTriggeringObject();
+                    if(trigger != null){
+                        trigger.GetComponent<Button>().SetOffPosition();
+                    }
                 }
             }
 
@@ -84,6 +86,13 @@ public class PlatformController : RaycastController
                 if(fromWaypointIndex >= globalWaypoints.Length - 1){
                     fromWaypointIndex = 0;
                     System.Array.Reverse(globalWaypoints);
+                    if(untriggerWhenDone){
+                        activeFlag = false;
+                        GameObject trigger = GetTriggeringObject();
+                        if(trigger != null){
+                            trigger.GetComponent<Button>().SetOffPosition();
+                        }
+                    }
                 }
             }
             nextMoveTime = Time.time + waitTime;  

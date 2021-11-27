@@ -10,9 +10,9 @@ public class Checkpoint : MonoBehaviour
 	public GameObject trigger;
 	public GameObject camerapoint;
 
-	public GameObject backtrackBlocker = null;
+	public Affectable backtrackBlocker = null;
 
-	public GameObject lockedDoor = null;
+	public Affectable lockedDoor = null;
 
 	[SerializeField]
 	private bool slideCamera = false;
@@ -26,9 +26,6 @@ public class Checkpoint : MonoBehaviour
 		trigger.GetComponent<SpriteRenderer>().enabled = false;
 		camerapoint.GetComponent<SpriteRenderer>().enabled = false;
 		camerapoint.SetActive(false);
-		if(backtrackBlocker != null){
-			backtrackBlocker.SetActive(false);
-		}
 		if(lockedDoor != null){
 			Assert.IsTrue(requiredKeys > 0);
 		}
@@ -41,7 +38,7 @@ public class Checkpoint : MonoBehaviour
 
 	public void SetupLevel(){
 		if(backtrackBlocker != null){
-			backtrackBlocker.SetActive(true);
+			backtrackBlocker.Trigger();
 		}
 		if(slideCamera){
 			camerapoint.GetComponent<CameraSlider>().startSlide();

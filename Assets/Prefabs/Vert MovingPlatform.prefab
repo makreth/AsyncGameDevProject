@@ -77,10 +77,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1941498844522984688, guid: 96010106a18139d4c9a63de6ac8eef73, type: 3}
       propertyPath: localWaypoints.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1941498844522984688, guid: 96010106a18139d4c9a63de6ac8eef73, type: 3}
       propertyPath: localWaypoints.Array.data[0].y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1941498844522984688, guid: 96010106a18139d4c9a63de6ac8eef73, type: 3}
+      propertyPath: localWaypoints.Array.data[1].x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1941498844522984688, guid: 96010106a18139d4c9a63de6ac8eef73, type: 3}

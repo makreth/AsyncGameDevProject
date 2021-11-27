@@ -3,11 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-enum FirePattern{
-    Single,
-    Blast
-}
-
 enum RotationDirection{
     Clockwise,
     CounterClockwise
@@ -27,8 +22,6 @@ public class TurretController : MonoBehaviour
     [SerializeField]
     private float projectileSpeed;
     [SerializeField]
-    private FirePattern firePattern;
-    [SerializeField]
     [Range(0f,10f)]
     private float rotationSpeed;
     [SerializeField]
@@ -40,15 +33,16 @@ public class TurretController : MonoBehaviour
     private int initialDelayTicks;
     private int delayTimer;
     private RotationDirection m_rotation_dir = RotationDirection.Clockwise;
-    private float m_tick_timer;
-    private float m_interval_timer;
+    private int m_tick_timer;
+    private int m_interval_timer;
     private bool firing;
 
 
     void Start()
     {   
         m_rotation_dir = startingRotationDirection;
-        m_tick_timer = 0;
+        m_tick_timer = fixedTicksPerShot;
+        m_interval_timer = 0;
         firing = true;
         delayTimer = initialDelayTicks;
     }
@@ -83,22 +77,22 @@ public class TurretController : MonoBehaviour
             transform.Rotate(-1 * Vector3.forward * rotationSpeed);
         }
         
+        m_interval_timer += 1;
+        if(m_interval_timer >= fixedTicksPerInterval && fixedTicksPerInterval > 0){
+            m_interval_timer = 0;
+            firing = !firing;
+        }
+        
 
         m_tick_timer += 1;
-        if(firing && m_tick_timer > fixedTicksPerShot){
+        if(m_tick_timer >= fixedTicksPerShot){
             m_tick_timer = 0;
-            if(firePattern == FirePattern.Single){
+            if(firing){
                 ProjectileBehavior clone_bullet = Instantiate(bullet, transform.position + (transform.up * 0.5f), transform.rotation).GetComponent<ProjectileBehavior>();
                 clone_bullet.setSpeed(projectileSpeed);
                 clone_bullet.applyProjectileType(bulletType);
             }
-        }
-
-        m_interval_timer += 1;
-        if(m_interval_timer > fixedTicksPerInterval && fixedTicksPerInterval > 0){
-            m_interval_timer = 0;
-            firing = !firing;
-        }
+        }        
     }
 
     void OnBecameInvisible(){

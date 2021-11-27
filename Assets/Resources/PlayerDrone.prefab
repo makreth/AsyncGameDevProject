@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: -5485047804982923273}
   - component: {fileID: 3734341361224021590}
   - component: {fileID: -5588052660667578939}
+  - component: {fileID: -7733187652719894973}
   m_Layer: 7
   m_Name: PlayerDrone
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -29,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 4738842270953306392}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.75, y: 0.75, z: 1}
+  m_LocalScale: {x: 1.1, y: 1.1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -75,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 2747690628134850419, guid: 545c2ce458ab40348a1534228127c1a7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c9103d67409bb554796540357adb2f8b, type: 3}
   m_Color: {r: 0.5943396, g: 0.5943396, b: 0.5943396, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -99,18 +100,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.00024962425, y: 0.0015644133}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 0.8828125}
+    oldSize: {x: 0.9375, y: 0.73046875}
     newSize: {x: 1, y: 0.8828125}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.8828125}
+  m_Size: {x: 0.9371227, y: 0.72353894}
   m_EdgeRadius: 0
 --- !u!114 &3734341361224021590
 MonoBehaviour:
@@ -124,11 +125,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50e7cdadcd7ce5444832a294fed33e55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  horizontalRayCount: 4
+  verticalRayCount: 4
   collisionMask:
     serializedVersion: 2
     m_Bits: 64
-  horizontalRayCount: 4
-  verticalRayCount: 4
 --- !u!114 &-5588052660667578939
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -145,7 +146,9 @@ MonoBehaviour:
   jumpHeight: 3
   distanceToPeak: 3
   maxHp: 12
+  maxAmmo: 0
   healthPickupGain: 3
+  invincible: 0
   projectileMask:
     serializedVersion: 2
     m_Bits: 256
@@ -155,3 +158,24 @@ MonoBehaviour:
   pickupMask:
     serializedVersion: 2
     m_Bits: 1024
+--- !u!50 &-7733187652719894973
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4738842270953306392}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 1
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

@@ -18,6 +18,7 @@ public abstract class RaycastController : Affectable
     protected float verticalRaySpacing;
     protected BoxCollider2D m_collider;
     protected RaycastOrigins raycastOrigins;
+    public CollisionInfo collisions;
 
     protected virtual void Start(){
         m_collider = GetComponent<BoxCollider2D>();
@@ -42,6 +43,13 @@ public abstract class RaycastController : Affectable
     
         horizontalRaySpacing = bounds.size.y / (horizontalRayCount - 1);
         verticalRaySpacing = bounds.size.x / (verticalRayCount - 1);
+    }
+
+    public virtual void Move(Vector3 velocity, bool standingOnPlatform = false){
+        transform.Translate(velocity);
+        if(standingOnPlatform){
+            collisions.below = true;
+        }
     }
 
     protected struct RaycastOrigins{

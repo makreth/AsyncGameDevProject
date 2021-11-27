@@ -6,6 +6,8 @@ public class Button : MonoBehaviour
 {
     [SerializeField]
     bool startOn = false;
+    [SerializeField]
+    bool oneContactOnly = false;
     public Affectable[] triggeredObjects;
 
 	public Sprite offSprite;
@@ -21,10 +23,17 @@ public class Button : MonoBehaviour
 			obj.SetTriggeringObject(gameObject);
 		}
         switchFlag = !startOn;
-        ActivateButton();
+        ActivateButton(true);
     }
 
-    public void ActivateButton(){
+    public void ActivateButton(bool initialize=false){
+        if(!initialize && oneContactOnly && switchFlag){
+            return;
+        }
+        foreach (Affectable obj in triggeredObjects)
+        {
+            obj.Trigger();
+        }
         if(switchFlag){
             SetOffPosition();
         }
@@ -41,9 +50,5 @@ public class Button : MonoBehaviour
     public void SetOnPosition(){
         switchFlag = true;
         m_sprite_renderer.sprite = onSprite;
-        foreach (Affectable obj in triggeredObjects)
-        {
-            obj.Trigger();
-        }
     }
 }
