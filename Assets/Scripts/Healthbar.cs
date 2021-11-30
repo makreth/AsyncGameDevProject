@@ -7,26 +7,13 @@ public class Healthbar : MonoBehaviour
 {
     public Image healthbar;
     public Text healthbarText;
-    public PlayerHealth player;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
+    public Player player;
 
     public void UpdateHealthbar()
     {
-        float playerHealth = player.health / player.maxHealth;
+        float playerHealth =  ((float) player.GetHp() / (float) player.GetMaxHp());
         healthbar.fillAmount = Mathf.Clamp(playerHealth, 0, 1f);
         healthbarText.text = Mathf.RoundToInt(playerHealth * 100).ToString();
-
         if(playerHealth >= 0.7f)
         {
             healthbar.color = new Color(0, 255, 0, 100);

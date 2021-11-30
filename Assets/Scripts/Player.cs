@@ -24,6 +24,8 @@ public class Player : MonoBehaviour
     public LayerMask projectileMask;
     public LayerMask killBoxMask;
     public LayerMask pickupMask;
+    public Healthbar health;
+    public AmmoUIScript ammoDisplay;
     private int hp;
     private int ammo;
     private int keys;
@@ -96,6 +98,7 @@ public class Player : MonoBehaviour
             Destroy(projectile);
             if(!invincible){
                 hp -= 1;
+                health.UpdateHealthbar();
                 StartCoroutine(Flicker());
             }
             
@@ -103,6 +106,7 @@ public class Player : MonoBehaviour
         if(Utility.CheckLayer(killBoxMask, targetVal)){
             if(!invincible){
                 hp -= 3;
+                health.UpdateHealthbar();
             }
             
             prevCheckpoint.SpawnPlayer(this);
@@ -114,9 +118,11 @@ public class Player : MonoBehaviour
                 if(hp > maxHp){
                     hp = maxHp;
                 }
+                health.UpdateHealthbar();
             }
             if(obj_tag.Equals("Ammo")){
                 ammo += 1;
+                ammoDisplay.UpdateAmmo();
             }
             if(obj_tag.Equals("Key")){
                 keys += 1;
@@ -148,6 +154,7 @@ public class Player : MonoBehaviour
 
     public void DecrementAmmo(){
         ammo -= 1;
+        ammoDisplay.UpdateAmmo();
     }
 
     public int GetKeys(){

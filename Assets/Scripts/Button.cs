@@ -30,10 +30,13 @@ public class Button : MonoBehaviour
         if(!initialize && oneContactOnly && switchFlag){
             return;
         }
-        foreach (Affectable obj in triggeredObjects)
-        {
-            obj.Trigger();
+        if(!initialize){
+            foreach (Affectable obj in triggeredObjects)
+            {
+                obj.Trigger();
+            }
         }
+        
         if(switchFlag){
             SetOffPosition();
         }

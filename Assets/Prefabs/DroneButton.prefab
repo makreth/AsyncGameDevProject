@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7787919720880822898}
   m_Layer: 0
   m_Name: DroneButton
-  m_TagString: ShotButton
+  m_TagString: DroneButton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -98,6 +98,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startOn: 0
+  oneContactOnly: 0
   triggeredObjects: []
   offSprite: {fileID: 2530564911472380330, guid: 60d699265b488b341a9af69bb02cad83, type: 3}
   onSprite: {fileID: 1763989116612304091, guid: 60d699265b488b341a9af69bb02cad83, type: 3}
