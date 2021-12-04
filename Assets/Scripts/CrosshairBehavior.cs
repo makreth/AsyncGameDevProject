@@ -22,6 +22,11 @@ public class CrosshairBehavior : MonoBehaviour
     }
     void Update()
     {
+        if (PauseMenu.isGamePaused)
+        {
+            return;
+        }
+
         Vector3 mousePosition = Input.mousePosition;
         mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         transform.position = new Vector2(mousePosition.x, mousePosition.y);
