@@ -38,6 +38,7 @@ public class Checkpoint : MonoBehaviour
 
 	public void SpawnPlayer(Player player)
 	{
+		AudioManager.instance.Play("Respawn");
 		player.gameObject.transform.position = spawnpoint.transform.position;
 		player.reset();
 	}

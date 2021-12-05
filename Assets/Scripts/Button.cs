@@ -31,6 +31,8 @@ public class Button : MonoBehaviour
             return;
         }
         if(!initialize){
+            AudioManager.instance.Play("Computer");
+            AudioManager.instance.Play("Open Door");
             foreach (Affectable obj in triggeredObjects)
             {
                 obj.Trigger();

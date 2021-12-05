@@ -87,7 +87,7 @@ public class Player : MonoBehaviour
 			m_SpriteRenderer.flipX = false;
 		}
 
-		// Movement sounds
+		//Movement sounds
 		// if (move_input.x == 0)
 		// 	audioManager.Pause("Drone Move", true);
 		// else
@@ -182,6 +182,7 @@ public class Player : MonoBehaviour
 		}
 		if (hp <= 0)
 		{
+			Debug.Log("Player destroyed");
 			Destroy(gameObject);
 		}
 	}
