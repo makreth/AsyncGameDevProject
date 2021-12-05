@@ -38,7 +38,10 @@ public class PauseMenu : MonoBehaviour
     {
         isGamePaused = false;
         pauseMenuCanvas.SetActive(false);
-        Time.timeScale = 1f;
+        if (!DialogueManager.isDialogueActive)
+        {
+            Time.timeScale = 1f;
+        }
     }
 
     public void ReturnToMainMenu()
