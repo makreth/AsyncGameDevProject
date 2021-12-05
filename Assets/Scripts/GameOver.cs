@@ -8,14 +8,6 @@ public class GameOver : MonoBehaviour
     public GameObject gameOverCanvas;
     public static bool isGameOver = false;
 
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Equals))
-        {
-            TriggerGameOver();
-        }
-    }
-
     public void TriggerGameOver()
     {
         gameOverCanvas.SetActive(true);
