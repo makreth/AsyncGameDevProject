@@ -35,7 +35,11 @@ public class AudioManager : MonoBehaviour
 
 	private void Start()
 	{
-		// Play("Theme");
+		Play("Theme");
+
+		// Immediately start and stop movement sound so pausing is done more easily later
+		Play("Drone Move");
+		Pause("Drone Move", true);
 	}
 
 	public void Play(string name)
@@ -47,6 +51,49 @@ public class AudioManager : MonoBehaviour
 			Debug.LogWarning("Sound: " + name + " not found");
 			return;
 		}
+
 		s.source.Play();
+	}
+
+	public void Stop(string name)
+	{
+		Sound s = Array.Find(sounds, sound => sound.name == name);
+
+		if (s == null)
+		{
+			Debug.LogWarning("Sound: " + name + " not found");
+			return;
+		}
+
+		s.source.Stop();
+	}
+
+	public void Pause(string name, bool pause)
+	{
+		Sound s = Array.Find(sounds, sound => sound.name == name);
+
+		if (s == null)
+		{
+			Debug.LogWarning("Sound: " + name + " not found");
+			return;
+		}
+
+		if (pause)
+			s.source.Pause();
+		else
+			s.source.UnPause();
+	}
+
+	public bool IsPlaying(string name)
+	{
+		Sound s = Array.Find(sounds, sound => sound.name == name);
+
+		if (s == null)
+		{
+			Debug.LogWarning("Sound: " + name + " not found");
+			throw new Exception("Sound: " + name + " not found");
+		}
+
+		return s.source.isPlaying;
 	}
 }
