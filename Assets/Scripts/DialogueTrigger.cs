@@ -8,6 +8,7 @@ public class DialogueTrigger : MonoBehaviour
     private bool used = false;
     public DialogueManager dialogueManager;
     public string speaker;
+    [TextArea]
     public string dialogue;
 
     private void OnTriggerEnter2D(Collider2D collision)
