@@ -12,6 +12,8 @@ TagManager:
   - Bullet
   - ShotButton
   - DroneButton
+  - AudioManager
+  - Door
   layers:
   - Default
   - TransparentFX
