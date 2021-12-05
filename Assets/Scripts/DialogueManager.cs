@@ -14,7 +14,7 @@ public class DialogueManager : MonoBehaviour
 
     void Update()
     {
-        if (isDialogueActive)
+        if (isDialogueActive && !PauseMenu.isGamePaused)
         {
             continueText.color = new Color(255, 255, 255, Mathf.PingPong(Time.unscaledTime * continueFlashSpeed, 1f));
             if (Input.GetKeyDown(KeyCode.Return))

@@ -20,35 +20,47 @@ public class Checkpoint : MonoBehaviour
 	[SerializeField]
 	private int requiredKeys = 0;
 
+	private AudioManager audioManager;
+
 	void Start()
 	{
 		spawnpoint.GetComponent<SpriteRenderer>().enabled = false;
 		trigger.GetComponent<SpriteRenderer>().enabled = false;
 		camerapoint.GetComponent<SpriteRenderer>().enabled = false;
 		camerapoint.SetActive(false);
-		if(lockedDoor != null){
+		if (lockedDoor != null)
+		{
 			Assert.IsTrue(requiredKeys > 0);
 		}
+
+		audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
 	}
 
-	public void SpawnPlayer(Player player){
+	public void SpawnPlayer(Player player)
+	{
 		player.gameObject.transform.position = spawnpoint.transform.position;
 		player.reset();
 	}
 
-	public void SetupLevel(){
-		if(backtrackBlocker != null){
+	public void SetupLevel()
+	{
+		if (backtrackBlocker != null)
+		{
+			audioManager.Play("Close Door");
 			backtrackBlocker.Trigger();
 		}
-		if(slideCamera){
+		if (slideCamera)
+		{
 			camerapoint.GetComponent<CameraSlider>().startSlide();
 		}
-		else{
+		else
+		{
 			Camera.main.transform.position = camerapoint.transform.position;
 		}
 	}
 
-	public int GetRequiredKeys(){
+	public int GetRequiredKeys()
+	{
 		return requiredKeys;
 	}
 }

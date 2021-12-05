@@ -15,14 +15,21 @@ public class CrosshairBehavior : MonoBehaviour
     private Image m_image;
     private bool secondaryFire;
     private bool killshot;
+
+    private AudioManager audioManager;
     void Start(){
         m_image = GetComponent<Image>();
         m_image.color = primaryColor;
         playerScript = player.GetComponent<Player>();
+        audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
     }
     void Update()
     {
+<<<<<<< Updated upstream
         if (PauseMenu.isGamePaused)
+=======
+        if (PauseMenu.isGamePaused || GameOver.isGameOver)
+>>>>>>> Stashed changes
         {
             return;
         }
@@ -31,6 +38,7 @@ public class CrosshairBehavior : MonoBehaviour
         mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         transform.position = new Vector2(mousePosition.x, mousePosition.y);
         if(Input.GetMouseButtonDown(0)){
+            audioManager.Play("Laser");
             if(secondaryFire && playerScript.GetAmmo() > 0){
                 killshot = true;
                 playerScript.DecrementAmmo();
