@@ -47,12 +47,6 @@ public class TurretController : MonoBehaviour
         delayTimer = initialDelayTicks;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     void FixedUpdate(){
         if(delayTimer > 0){
             delayTimer -= 1;

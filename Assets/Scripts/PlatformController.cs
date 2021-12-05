@@ -8,6 +8,9 @@ public class PlatformController : RaycastController
     public Vector3[] localWaypoints;
 
     [SerializeField]
+    private bool startOn = false;
+
+    [SerializeField]
     private float speed;
     [SerializeField]
     private bool cyclic;
@@ -27,12 +30,11 @@ public class PlatformController : RaycastController
 
     protected override void Start(){
         base.Start();
-
+        activeFlag = startOn;
         globalWaypoints = new Vector3[localWaypoints.Length];
         for(int i = 0; i < localWaypoints.Length; i++){
             globalWaypoints[i] = localWaypoints[i] + transform.position;
         }
-        activeFlag = false;
         Vector3 velocity = CalculatePlatformMovement(true);
         transform.Translate(velocity);
     }
