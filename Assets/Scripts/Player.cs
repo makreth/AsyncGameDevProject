@@ -88,10 +88,10 @@ public class Player : MonoBehaviour
 		}
 
 		// Movement sounds
-		if (move_input.x == 0)
-			audioManager.Pause("Drone Move", true);
-		else
-			audioManager.Pause("Drone Move", false);
+		// if (move_input.x == 0)
+		// 	audioManager.Pause("Drone Move", true);
+		// else
+		// 	audioManager.Pause("Drone Move", false);
 
 		velocity.x = move_input.x * moveSpeed;
 		velocity.y += gravity;
