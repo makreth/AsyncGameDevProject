@@ -25,7 +25,7 @@ public class CrosshairBehavior : MonoBehaviour
     }
     void Update()
     {
-        if (PauseMenu.isGamePaused)
+        if (PauseMenu.isGamePaused || GameOver.isGameOver)
         {
             return;
         }

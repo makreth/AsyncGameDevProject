@@ -19,7 +19,10 @@ public class PauseMenu : MonoBehaviour
             }
             else
             {
-                PauseGame();
+                if (!GameOver.isGameOver)
+                {
+                    PauseGame();
+                }
             }
         }
     }
