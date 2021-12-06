@@ -21,6 +21,7 @@ public class Player : MonoBehaviour
 	private int healthPickupGain;
 	[SerializeField]
 	bool invincible = false;
+	public GameOver gameOver;
 	public LayerMask projectileMask;
 	public LayerMask killBoxMask;
 	public LayerMask pickupMask;
@@ -182,8 +183,8 @@ public class Player : MonoBehaviour
 		}
 		if (hp <= 0)
 		{
-			Debug.Log("Player destroyed");
 			Destroy(gameObject);
+			gameOver.TriggerGameOver();
 		}
 	}
 
