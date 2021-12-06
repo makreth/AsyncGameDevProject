@@ -88,12 +88,4 @@ public class TurretController : MonoBehaviour
             }
         }        
     }
-
-    void OnBecameInvisible(){
-        gameObject.SetActive(false);
-    }
-
-    void OnBecameVisible(){
-        gameObject.SetActive(true);
-    }
 }

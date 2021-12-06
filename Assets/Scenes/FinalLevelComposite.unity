@@ -21900,7 +21900,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4376629196815392466, guid: ff7a09a798f5aef47a0f42922ec9969e, type: 3}
       propertyPath: m_Tiles.Array.data[121].first.x
-      value: 26
+      value: 27
       objectReference: {fileID: 0}
     - target: {fileID: 4376629196815392466, guid: ff7a09a798f5aef47a0f42922ec9969e, type: 3}
       propertyPath: m_Tiles.Array.data[121].first.y
@@ -21924,7 +21924,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4376629196815392466, guid: ff7a09a798f5aef47a0f42922ec9969e, type: 3}
       propertyPath: m_Tiles.Array.data[124].first.x
-      value: 26
+      value: 27
       objectReference: {fileID: 0}
     - target: {fileID: 4376629196815392466, guid: ff7a09a798f5aef47a0f42922ec9969e, type: 3}
       propertyPath: m_Tiles.Array.data[124].first.y
@@ -21948,7 +21948,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4376629196815392466, guid: ff7a09a798f5aef47a0f42922ec9969e, type: 3}
       propertyPath: m_Tiles.Array.data[127].first.x
-      value: 26
+      value: 27
       objectReference: {fileID: 0}
     - target: {fileID: 4376629196815392466, guid: ff7a09a798f5aef47a0f42922ec9969e, type: 3}
       propertyPath: m_Tiles.Array.data[127].first.y
@@ -30484,6 +30484,10 @@ PrefabInstance:
     - target: {fileID: 8331373686842333767, guid: b1ab411c9977d444c83a62ab1ff5f251, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8331373686842333816, guid: b1ab411c9977d444c83a62ab1ff5f251, type: 3}
+      propertyPath: untriggerWhenDone
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8331373686842333816, guid: b1ab411c9977d444c83a62ab1ff5f251, type: 3}
       propertyPath: localWaypoints.Array.data[1].y
