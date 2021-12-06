@@ -34,12 +34,15 @@ public class CrosshairBehavior : MonoBehaviour
         mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         transform.position = new Vector2(mousePosition.x, mousePosition.y);
         if(Input.GetMouseButtonDown(0)){
-            if(secondaryFire && playerScript.GetAmmo() > 0){
-                killshot = true;
-                playerScript.DecrementAmmo();
-            }
-            if(killshot){
-                audioManager.Play("BigLaser");
+            if(secondaryFire){
+                if(playerScript.GetAmmo() > 0){
+                    killshot = true;
+                    playerScript.DecrementAmmo();
+                    audioManager.Play("BigLaser");
+                }
+                else{
+                    return;
+                }
             }
             else{
                 audioManager.Play("Laser");
@@ -51,7 +54,7 @@ public class CrosshairBehavior : MonoBehaviour
                         rayHit.collider.gameObject.GetComponent<Button>().ActivateButton();
                         continue;
                     }
-                    if(killshot){
+                    if(killshot && rayHit.collider.transform.CompareTag("Bullet")){
                         Destroy(rayHit.collider.gameObject);
                         continue;
                     }

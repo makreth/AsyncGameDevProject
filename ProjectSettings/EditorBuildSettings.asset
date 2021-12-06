@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/FinalLevelComposite.unity
     guid: 754a15ff28517994eb77f48fbb64abf4
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: d5eac7a410b9d864aaeb91c13c8db5f5
   m_configObjects: {}

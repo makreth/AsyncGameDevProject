@@ -19,6 +19,9 @@ public class DialogueTrigger : MonoBehaviour
             {
                 used = true;
                 dialogueManager.TriggerDialogue(speaker, dialogue);
+                if(isSingleUse){
+                    gameObject.SetActive(false);
+                }
             }
         }
     }

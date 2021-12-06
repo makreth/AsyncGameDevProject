@@ -80,3 +80,21 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
+  - name: Damage
+    clip: {fileID: 8300000, guid: 792c074ab4ce3e647b91091a7a5f9fe0, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Computer
+    clip: {fileID: 8300000, guid: adcae361556a22f45b36aca17eb52aa2, type: 3}
+    volume: 0.75
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Respawn
+    clip: {fileID: 8300000, guid: 07419281e2859c54198fd8a588ce5f56, type: 3}
+    volume: 0.6
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}

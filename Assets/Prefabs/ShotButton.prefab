@@ -97,7 +97,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8351bf7e8cac4df4cb6884e508518619, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  disabledColor: {r: 0.019607844, g: 0.007843138, b: 0.007843138, a: 0.3137255}
   startOn: 0
+  oneContactOnly: 0
   triggeredObjects: []
   offSprite: {fileID: -8054659254176978768, guid: c221d99a36b20c049b1eabdcd4f0db2a, type: 3}
   onSprite: {fileID: -4339765951374888633, guid: c221d99a36b20c049b1eabdcd4f0db2a, type: 3}

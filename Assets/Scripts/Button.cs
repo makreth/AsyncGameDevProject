@@ -5,6 +5,8 @@ using UnityEngine;
 public class Button : MonoBehaviour
 {
     [SerializeField]
+    Color disabledColor;
+    [SerializeField]
     bool startOn = false;
     [SerializeField]
     bool oneContactOnly = false;
@@ -14,10 +16,12 @@ public class Button : MonoBehaviour
 	public Sprite onSprite;
 
 	protected SpriteRenderer m_sprite_renderer;
+    protected Color originalColor;
 	protected bool switchFlag;
     void Start()
     {
         m_sprite_renderer = GetComponent<SpriteRenderer>();
+        originalColor = m_sprite_renderer.color;
 		m_sprite_renderer.sprite = offSprite;
 		foreach(Affectable obj in triggeredObjects){
 			obj.SetTriggeringObject(gameObject);
@@ -37,6 +41,9 @@ public class Button : MonoBehaviour
             {
                 obj.Trigger();
             }
+            if(oneContactOnly){
+                m_sprite_renderer.color = disabledColor;
+            }
         }
         
         if(switchFlag){
@@ -48,6 +55,7 @@ public class Button : MonoBehaviour
     }
 
     public void SetOffPosition(){
+        m_sprite_renderer.color = originalColor;
         switchFlag = false;
         m_sprite_renderer.sprite = offSprite;
     }
