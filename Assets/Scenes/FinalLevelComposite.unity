@@ -30522,6 +30522,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5cbf415fadffe494fb8972f02aa5e9a2, type: 3}
+--- !u!114 &778169665 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3595301036164749165, guid: 5cbf415fadffe494fb8972f02aa5e9a2, type: 3}
+  m_PrefabInstance: {fileID: 778169664}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1735eb5c968820a45a6c65bfbdd40182, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &793905823 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 140822909698314892, guid: 30e6599e3c3493643a135477cff6a50c, type: 3}
@@ -35092,6 +35103,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1022012974}
     m_Modifications:
+    - target: {fileID: 5436334531681555227, guid: bff9dd7fbf8355647a893a2f45cd735d, type: 3}
+      propertyPath: lockedDoor
+      value: 
+      objectReference: {fileID: 778169665}
     - target: {fileID: 5436334531681555227, guid: bff9dd7fbf8355647a893a2f45cd735d, type: 3}
       propertyPath: slideCamera
       value: 1
